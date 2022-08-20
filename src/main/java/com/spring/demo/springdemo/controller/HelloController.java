@@ -10,6 +10,6 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello(){
-        return "<h1>Welcome to Spring Boot with Jenkins</h1>";
+        return "<h1>Welcome to Spring Boot with Jenkins CI/CD</h1>";
     }
 }

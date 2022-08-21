@@ -23,7 +23,7 @@ pipeline{
                     withCredentials([string(credentialsId: 'DOCKER_HUB_KEY', variable: 'DOCKER_HUB')]) {
                         sh 'docker login -u naveed0004 -p ${DOCKER_HUB}'
                     }
-                    sh 'sudo docker push naveed0004/spring-integration'
+                    sh 'sudo kubectl cluster-info'
                 }
             }
         }

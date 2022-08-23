@@ -32,4 +32,5 @@ spec:
   ports:
     - port: 8081 # The port that the service is running on in the cluster
       targetPort: 8081 # The port exposed by the service
+      nodePort: 3000
   type: LoadBalancer # type of the service.

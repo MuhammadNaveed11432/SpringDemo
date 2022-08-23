@@ -21,9 +21,8 @@ pipeline{
             steps{
                 script{
                     withCredentials([string(credentialsId: 'DOCKER_HUB_KEY', variable: 'DOCKER_HUB')]) {
-                        sh 'docker login -u naveed0004 -p ${DOCKER_HUB}'
+                        
                     }
-                    sh 'sudo kubectl cluster-info'
                 }
             }
         }
@@ -31,7 +30,9 @@ pipeline{
             steps{
                 script{
                     withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'minikube', contextName: '', credentialsId: 'kube-token', namespace: 'default', serverUrl: 'https://10.0.2.15:8443']]) {
-                      sh 'sudo kubectl create -f deployment.yaml'
+                        sh 'sudo kubectl delete svc springboot-k8s-svc'
+                        sh 'sudo kubectl delete replicaSet spring-boot-k8s-rs'
+                        sh 'sudo kubectl create -f deployment.yaml'
                     }
                 }
             }

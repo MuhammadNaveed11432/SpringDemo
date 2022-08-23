@@ -30,7 +30,9 @@ pipeline{
         stage('Deploy to k8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'deployment.yaml',kubeconfigId: 'config-key')
+                    withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'minikube', contextName: '', credentialsId: 'kube-token', namespace: 'default', serverUrl: 'https://10.0.2.15:8443']]) {
+                      sh 'sudo kubectl -f deployment.yaml'
+                    }
                 }
             }
         }

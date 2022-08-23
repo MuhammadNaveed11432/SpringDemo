@@ -2,7 +2,6 @@ kind: Pod
 apiVersion: v1
 metadata:
  name: myfirstpod
- namespace: devolpment
 spec:
  containers:
  - name: container1

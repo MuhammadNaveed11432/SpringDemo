@@ -30,8 +30,7 @@ pipeline{
             steps{
                 script{
                     withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'minikube', contextName: '', credentialsId: 'kube-token', namespace: 'default', serverUrl: 'https://10.0.2.15:8443']]) {
-                        sh 'sudo kubectl delete svc springboot-k8s-svc'
-                        sh 'sudo kubectl delete replicaSet spring-boot-k8s-rs'
+                        sh 'sudo kubectl delete deploy spring-boot-k8s-deployment'
                         sh 'sudo kubectl create -f deployment.yaml'
                     }
                 }

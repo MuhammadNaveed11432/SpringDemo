@@ -13,24 +13,15 @@ pipeline{
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'sudo docker build -t naveed0004/spring-integration .'
+                    sh 'sudo docker build -t naveed0004/spring-integration:v${BUILD_NUMBER} .'
                 }
             }
         }
-        stage('Push Iamge to Docker Hub (naveed0004)'){
+        stage('Push Iamge to Docker Hub'){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'DOCKER_HUB_KEY', variable: 'DOCKER_HUB')]) {
-                        
-                    }
-                }
-            }
-        }
-        stage('Deploy to k8s'){
-            steps{
-                script{
-                    withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'minikube', contextName: '', credentialsId: 'kube-token', namespace: 'default', serverUrl: 'https://10.0.2.15:8443']]) {
-                        sh 'sudo kubectl create -f deployment.yaml'
+                        sh 'echo login to docker hub'
                     }
                 }
             }

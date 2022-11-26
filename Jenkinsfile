@@ -1,8 +1,14 @@
 pipeline{
     agent any
+    
+    environment {
+        IMAGE_TAG = "v${BUILD_NUMBER}"
+    }
+    
     tools{
          maven 'MAVEN_HOME'
     }
+    
     stages{
         stage('Build Maven'){
             steps{
@@ -13,7 +19,7 @@ pipeline{
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'sudo docker build -t naveed0004/spring-integration:v${BUILD_NUMBER} .'
+                    sh 'sudo docker build -t naveed0004/spring-integration:IMAGE_TAG .'
                 }
             }
         }
@@ -28,7 +34,7 @@ pipeline{
         }
         stage('Trigger Manifest'){
             steps{
-                build job: 'update_Manifest', parameters: [string(name: 'IMAGE_TAG', value: v${BUILD_NUMBER})]
+                build job: 'update_Manifest', parameters: [string(name: 'IMAGE_TAG', value: {env.IMAGE_TAG})]
             }
         }
     }

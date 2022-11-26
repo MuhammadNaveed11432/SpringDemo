@@ -3,7 +3,6 @@ pipeline{
     
     environment {
         IMAGE_TAG = "v${BUILD_NUMBER}"
-        echo '{env.IMAGE_TAG}'
     }
     
     tools{

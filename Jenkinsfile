@@ -19,7 +19,7 @@ pipeline{
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'sudo docker build -t naveed0004/spring-integration:'{env.IMAGE_TAG}' .'
+                    sh 'sudo docker build -t naveed0004/spring-integration:${BUILD_NUMBER} .'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline{
         }
         stage('Trigger Manifest'){
             steps{
-                build job: 'update_Manifest', parameters: [string(name: 'IMAGE_TAG', value: '{env.IMAGE_TAG}')]
+                build job: 'update_Manifest', parameters: [string(name: 'IMAGE_TAG', value: ${BUILD_NUMBER})]
             }
         }
     }

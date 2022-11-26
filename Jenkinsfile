@@ -34,7 +34,7 @@ pipeline{
         }
         stage('Trigger Manifest'){
             steps{
-                build job: 'update_Manifest', parameters: [string(name: 'IMAGE_TAG', value: ${BUILD_NUMBER})]
+                build job: 'update_Manifest', parameters: [string(name: 'IMAGE_TAG', value: env.BUILD_NUMBER)]
             }
         }
     }
